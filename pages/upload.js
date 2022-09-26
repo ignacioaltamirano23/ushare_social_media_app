@@ -24,20 +24,23 @@ const UploadPage = () => {
   const filePickerRef = useRef(null);
   const { data: session } = useSession();
   const { push } = useRouter();
+  console.log(session);
 
   const sendPost = async () => {
     if (loading) return;
     setLoading(true);
 
     const docRef = await addDoc(collection(db, 'posts'), {
-      postedBy: session.user.uid,
-      username: session.user.name,
-      userImg: session.user.image,
-      tag: session.user.tag,
+      postedBy: session?.user.uid,
+      username: session?.user.name,
+      profileImg: session?.user.image,
+      tag: session?.user.tag,
       createdAt: serverTimestamp(),
       caption,
       category,
     });
+
+    console.log(`doc added with id: ${docRef.id}`);
 
     const imageRef = ref(storage, `/posts/${docRef.id}/image`);
 
@@ -140,7 +143,7 @@ const UploadPage = () => {
                 Discard
               </button>
               <button className="upload-btn" onClick={sendPost}>
-                {!loading ? 'Post' : 'Loading...'}
+                {loading ? 'Loading' : 'Post'}
               </button>
             </div>
           </div>
@@ -151,3 +154,22 @@ const UploadPage = () => {
 };
 
 export default UploadPage;
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
+}
