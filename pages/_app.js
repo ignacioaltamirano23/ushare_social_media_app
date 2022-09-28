@@ -3,12 +3,15 @@ import '../styles/globals.scss';
 import '@fontsource/roboto';
 import Navbar from '../components/Navbar';
 import { SessionProvider } from 'next-auth/react';
+import { MainProvider } from '../context/mainContext';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
-      <Navbar />
-      <Component {...pageProps} />
+      <MainProvider>
+        <Navbar />
+        <Component {...pageProps} />
+      </MainProvider>
     </SessionProvider>
   );
 }

@@ -24,7 +24,6 @@ const UploadPage = () => {
   const filePickerRef = useRef(null);
   const { data: session } = useSession();
   const { push } = useRouter();
-  console.log(session);
 
   const sendPost = async () => {
     if (loading) return;
@@ -75,19 +74,14 @@ const UploadPage = () => {
 
   return (
     <>
-      <div
-        className={
-          loading
-            ? 'row upload-wrapper mx-auto opacity'
-            : 'row upload-wrapper mx-auto'
-        }
-      >
+      <div className="upload-container row mt-5 mx-auto container">
         <div
+          className="col-md-5 d-flex justify-content-center align-items-center text-center p-5"
+          role={'button'}
           onClick={() => filePickerRef.current.click()}
-          className="col-md-5 align-items-center d-flex justify-content-center flex-column"
         >
           {selectedFile ? (
-            <div className="">
+            <>
               <Image
                 src={selectedFile}
                 width={400}
@@ -96,56 +90,54 @@ const UploadPage = () => {
               />
               <input
                 type="file"
-                ref={filePickerRef}
                 hidden
                 onChange={addImageToPost}
-              />
-            </div>
-          ) : (
-            <>
-              <h3 className="mt-3">Upload</h3>
-              <p className="my-3 cloud-icon">
-                <AiOutlineCloudUpload />
-              </p>
-              <button className="px-3 mb-3">Select File</button>
-              <input
-                type="file"
                 ref={filePickerRef}
-                hidden
-                onChange={addImageToPost}
               />
             </>
+          ) : (
+            <div className="d-flex flex-column">
+              <p>Upload a photo</p>
+              <p className="cloud-icon">
+                <AiOutlineCloudUpload />
+              </p>
+              <button>Select File</button>
+              <input
+                type="file"
+                hidden
+                onChange={addImageToPost}
+                ref={filePickerRef}
+              />
+            </div>
           )}
         </div>
-        <div className="col-md-7">
-          <div className="upload-details d-flex flex-column justify-content-center align-items-center">
-            <div className="w-100 d-flex flex-column">
-              <label>Caption</label>
-              <input
-                type="text"
-                value={caption}
-                onChange={(e) => setCaption(e.target.value)}
-              />
-              <label className=" mt-3">Choose a category</label>
-              <select
-                className="text-capitalize w-sm-50"
-                onChange={(e) => setCategory(e.target.value)}
-              >
-                {categories.map((item) => (
-                  <option value={item.name} key={item.name}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="d-flex justify-content-between w-100">
-              <button className="upload-btn" onClick={discardPost}>
-                Discard
-              </button>
-              <button className="upload-btn" onClick={sendPost}>
-                {loading ? 'Loading' : 'Post'}
-              </button>
-            </div>
+        <div className="col-md-7 d-flex flex-column justify-content-between p-5">
+          <div className="d-flex flex-column">
+            <label className="mb-2">Caption</label>
+            <input
+              type="text"
+              onChange={(e) => setCaption(e.target.value)}
+              value={caption}
+            />
+          </div>
+          <div className="d-flex flex-column">
+            <label className="mb-2">Choose a category</label>
+            <select
+              className="text-capitalize w-50"
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              {categories.map((category) => (
+                <option value={category.name} key={category.name}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="d-flex justify-content-evenly">
+            <button onClick={discardPost}>Discard</button>
+            <button onClick={sendPost}>
+              {loading ? 'Loading...' : 'Post image'}
+            </button>
           </div>
         </div>
       </div>
