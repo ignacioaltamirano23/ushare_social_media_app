@@ -3,7 +3,7 @@ import Post from './Post';
 
 const Feed = ({ posts }) => {
   return (
-    <div className="container my-4 posts-grid">
+    <div className="mx-auto my-4 posts">
       {posts.map((post) => (
         <Post key={post.id} id={post.id} post={post.data()} />
       ))}

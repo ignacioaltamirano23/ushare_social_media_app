@@ -82,7 +82,7 @@ const Post = ({ id, post }) => {
     await deleteDoc(doc(db, 'posts', id));
   };
   return (
-    <div className="p-4 post">
+    <div className="p-3 post">
       <div className="d-flex">
         <div role={'button'}>
           <Link href={`/users/${post?.tag}`}>
@@ -120,10 +120,7 @@ const Post = ({ id, post }) => {
           {saved && <AiOutlineCheckCircle />}
         </span>
       </div>
-      <div
-        className="mt-3"
-        whileHover={{ scale: 1.1, transition: { duration: 0.4 } }}
-      >
+      <div className="mt-3 d-flex justify-content-center">
         <Link href={`/posts/${id}`}>
           <a>
             <Image

@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <>
       {session && (
-        <nav className="p-1">
+        <nav className="p-1 sticky-top">
           <div className="container">
             <div className="header d-flex justify-content-between align-items-center">
               <Link href="/">ushare</Link>

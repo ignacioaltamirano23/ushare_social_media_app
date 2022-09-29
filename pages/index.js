@@ -11,7 +11,7 @@ export default function Home({ providers }) {
 
   if (!session) return <Login providers={providers} />;
   return (
-    <main>
+    <main className="container">
       <Sidebar users={users} />
       <Feed posts={posts} />
     </main>
