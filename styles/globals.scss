@@ -89,22 +89,26 @@ select {
   }
 }
 
+.active {
+  color: $primary;
+}
+
 .no-posts {
   display: grid;
   place-items: center;
-
   height: 80vh;
-}
-
-.posts {
   margin-left: 20vw;
 }
 
+.posts {
+  border-top: 2px solid $gray-color;
+}
+
 .post {
-  width: 45vw;
+  width: 50vw;
   margin-bottom: 2rem;
   margin-left: 30vw;
-  border-bottom: 1px solid $third-color;
+  border-bottom: 2px solid $third-color;
 
   img {
     object-fit: contain;
@@ -112,7 +116,6 @@ select {
   }
 
   p {
-    color: $third-color;
     color: $primary;
   }
 }
@@ -130,9 +133,15 @@ select {
   cursor: pointer;
 }
 
-@media screen and (max-width: 992px) {
-  .category {
-    border: 0;
+.close-icon {
+  font-size: 1.8rem;
+  cursor: pointer;
+  top: 0%;
+  left: 86%;
+  color: $primary;
+  transition: opacity 300ms ease-in;
+  &:hover {
+    opacity: 0.85;
   }
 }
 
@@ -152,11 +161,51 @@ select {
 }
 
 .sidebar {
-  // padding: 0.5rem;
   position: fixed;
   top: 12%;
   width: 20vw;
-  border-right: 1px solid $gray-color;
+}
+
+.discover {
+  border-top: 2px solid $gray-color;
+  border-bottom: 2px solid $gray-color;
+}
+
+.home {
+  border-bottom: 2px solid $gray-color;
+}
+
+@media screen and (max-width: 992px) {
+  .category {
+    border: 0;
+  }
+
+  .categories {
+    p {
+      font-size: 1.2rem;
+    }
+  }
+
+  .discover {
+    border: none;
+  }
+
+  .home {
+    border: none;
+  }
+
+  .posts {
+    border: 0;
+  }
+
+  .post {
+    margin-left: 25vw;
+  }
+
+  .sidebar {
+    width: 10vw;
+    border-right: 2px solid $gray-color;
+  }
 }
 
 .sign-in {
@@ -199,6 +248,12 @@ select {
       }
     }
   }
+}
+
+.tag {
+  cursor: pointer;
+  font-weight: bold;
+  color: $primary;
 }
 
 .upload-container {

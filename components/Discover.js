@@ -4,10 +4,13 @@ import Link from 'next/link';
 
 const Discover = ({ users }) => {
   return (
-    <div className="border-top p-1">
-      <p>Suggested Accounts</p>
+    <div className="discover p-2">
+      <p className="d-none d-lg-block my-2">Suggested Accounts</p>
       {users?.map((user) => (
-        <div className="d-flex align-items-center" key={user.data().name}>
+        <div
+          className="d-flex justify-content-center align-items-center justify-content-lg-start my-lg-2 my-2"
+          key={user.data().name}
+        >
           <Link
             href={`/users/${user
               .data()
@@ -24,21 +27,18 @@ const Discover = ({ users }) => {
               className="rounded-circle"
             />
           </Link>
-          <div>
-            <Link
-              href={`/users/${user
-                .data()
-                .name.split(' ')
-                .join('')
-                .toLowerCase()}`}
-            >
-              <p role={'button'}>
-                {user.data().name.split(' ').join('').toLowerCase()}
-              </p>
-            </Link>
-            <p>{user.data().name}</p>
-          </div>
-          <p>
+          <Link
+            href={`/users/${user
+              .data()
+              .name.split(' ')
+              .join('')
+              .toLowerCase()}`}
+          >
+            <p className="tag ms-2 me-1 d-none d-lg-block">
+              {user.data().name.split(' ').join('').toLowerCase()}
+            </p>
+          </Link>
+          <p className="tag d-none d-lg-block">
             <GoVerified />
           </p>
         </div>

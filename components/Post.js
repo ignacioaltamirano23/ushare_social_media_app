@@ -15,8 +15,9 @@ import { BiHeart } from 'react-icons/bi';
 import { FaComments } from 'react-icons/fa';
 import {
   AiFillHeart,
-  AiOutlineCheckCircle,
   AiOutlineDelete,
+  AiOutlineFileAdd,
+  AiOutlineFileDone,
 } from 'react-icons/ai';
 import { GoVerified } from 'react-icons/go';
 import Moment from 'react-moment';
@@ -82,45 +83,51 @@ const Post = ({ id, post }) => {
     await deleteDoc(doc(db, 'posts', id));
   };
   return (
-    <div className="p-3 post">
-      <div className="d-flex">
-        <div role={'button'}>
+    <div className="p-2 post mt-1">
+      <div className="d-flex align-items-center mb-2">
+        <Link href={`/users/${post?.tag}`}>
+          <Image
+            role={'button'}
+            className="rounded-circle"
+            src={post?.profileImg}
+            width={35}
+            height={35}
+            alt={post?.username}
+          />
+        </Link>
+        <div className="d-flex flex-column  justify-content-cente align-items">
           <Link href={`/users/${post?.tag}`}>
-            <Image
-              className="rounded-circle"
-              src={post?.profileImg}
-              width={40}
-              height={40}
-              alt={post?.username}
-            />
+            <div className="d-flex ms-3">
+              <p role={'button'}>
+                <b>{post?.tag}</b>&nbsp;
+              </p>
+              <p role={'button'} className="d-none d-sm-block">
+                <GoVerified />
+              </p>
+            </div>
           </Link>
-        </div>
-        <div>
-          <Link href={`/users/${post?.tag}`}>
-            <p role={'button'} className="mb-0 ms-3">
-              <b>{post?.tag}</b>&nbsp;
-              <GoVerified />
-            </p>
-          </Link>
-          <span className="mb-0 ms-3">
+          <span className="ms-3 d-none d-sm-block">
             <Moment fromNow>{post?.createdAt?.toDate()}</Moment>
           </span>
         </div>
+
         <span
           role={'button'}
-          className={
-            saved
-              ? 'active ms-auto align-self-start'
-              : 'ms-auto align-self-start'
-          }
+          className={saved ? 'active ms-auto' : ' ms-auto'}
           onClick={savePost}
         >
-          {saved ? 'Saved' : 'Save'}
-          &nbsp;
-          {saved && <AiOutlineCheckCircle />}
+          {saved ? (
+            <p className="icon">
+              <AiOutlineFileDone />
+            </p>
+          ) : (
+            <p className="icon">
+              <AiOutlineFileAdd />
+            </p>
+          )}
         </span>
       </div>
-      <div className="mt-3 d-flex justify-content-center">
+      <div className="d-flex justify-content-center">
         <Link href={`/posts/${id}`}>
           <a>
             <Image
@@ -132,7 +139,7 @@ const Post = ({ id, post }) => {
           </a>
         </Link>
       </div>
-      <div className="mt-2 d-flex align-items-center">
+      <div className="d-flex align-items-center">
         <span className="like-count">
           {likes.length > 0 && likes.length}&nbsp;
         </span>
@@ -146,7 +153,7 @@ const Post = ({ id, post }) => {
           </p>
         )}
         <span className="comments-count me-2">
-          {comments?.length > 0 && comments.length}
+          {comments?.length > 0 && comments.length}1
         </span>
         <Link href={`/posts/${id}`}>
           <p className="icon comment-icon">
