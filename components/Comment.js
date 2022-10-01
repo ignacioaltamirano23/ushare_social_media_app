@@ -5,6 +5,7 @@ import { GoVerified } from 'react-icons/go';
 import { useSession } from 'next-auth/react';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../config/firebase.config';
+import { motion } from 'framer-motion';
 
 const Comment = ({ comment, postId }) => {
   const { data: session } = useSession();
@@ -29,7 +30,12 @@ const Comment = ({ comment, postId }) => {
               />
             </Link>
           </div>
-          <div className="col-9 py-2 d-flex justify-content-center flex-column">
+          <motion.div
+            className="col-9 py-2 d-flex justify-content-center flex-column"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
             <Link href={`/users/${comment.tag}`}>
               <p role={'button'} className="mb-0">
                 <b>{comment?.tag}</b>&nbsp;
@@ -37,16 +43,21 @@ const Comment = ({ comment, postId }) => {
               </p>
             </Link>
             <span className="mb-0">{comment.comment}</span>
-          </div>
+          </motion.div>
         </div>
       </div>
-      <div className="col-2 d-flex align-items-end">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="col-2 d-flex align-items-end"
+      >
         {session?.user.uid == comment.userId && (
           <span role={'button'} className="text-danger" onClick={deleteComment}>
             Delete
           </span>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 };

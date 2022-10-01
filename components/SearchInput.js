@@ -11,7 +11,7 @@ const SearchInput = () => {
     push(`/search/${search}`);
   };
   return (
-    <form onSubmit={handleSubmit} className="mx-auto">
+    <form onSubmit={handleSubmit} className="mx-auto d-none d-md-block">
       <input
         type="text"
         placeholder="Search..."

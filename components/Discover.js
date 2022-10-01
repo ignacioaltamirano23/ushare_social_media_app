@@ -6,7 +6,7 @@ const Discover = ({ users }) => {
   return (
     <div className="discover p-2">
       <p className="d-none d-lg-block my-2">Suggested Accounts</p>
-      {users?.map((user) => (
+      {users?.slice(0, 3).map((user) => (
         <div
           className="d-flex justify-content-center align-items-center justify-content-lg-start my-lg-2 my-2"
           key={user.data().name}

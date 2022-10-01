@@ -22,6 +22,7 @@ import {
 import { GoVerified } from 'react-icons/go';
 import Moment from 'react-moment';
 import { db } from '../config/firebase.config';
+import { motion } from 'framer-motion';
 
 const Post = ({ id, post }) => {
   const [likes, setLikes] = useState([]);
@@ -83,21 +84,26 @@ const Post = ({ id, post }) => {
     await deleteDoc(doc(db, 'posts', id));
   };
   return (
-    <div>
-      <div className="d-flex align-items-center mb-2">
+    <div className="p-3 mx-auto">
+      <div
+        className="d-flex align-items-center
+       mb-2"
+      >
         <Link href={`/users/${post?.tag}`}>
-          <Image
-            role={'button'}
-            className="rounded-circle"
-            src={post?.profileImg}
-            width={35}
-            height={35}
-            alt={post?.username}
-          />
+          <div className="image-container">
+            <Image
+              role={'button'}
+              className="rounded-circle"
+              src={post?.profileImg}
+              width={35}
+              height={35}
+              alt={post?.username}
+            />
+          </div>
         </Link>
         <div className="d-flex flex-column  justify-content-cente align-items">
           <Link href={`/users/${post?.tag}`}>
-            <div className="d-flex ms-3">
+            <div className="d-flex ms-3 d-none d-sm-flex">
               <p role={'button'}>
                 <b>{post?.tag}</b>&nbsp;
               </p>
@@ -129,18 +135,19 @@ const Post = ({ id, post }) => {
       </div>
       <div className="d-flex justify-content-center">
         <Link href={`/posts/${id}`}>
-          <a>
+          <motion.a>
             <Image
+              role="button"
               width={400}
               height={400}
               src={post?.image}
               alt={post?.caption}
             />
-          </a>
+          </motion.a>
         </Link>
       </div>
       <div className="d-flex align-items-center p-1">
-        <span>{likes.length > 0 && likes.length}&nbsp;</span>
+        <span className="me-2">{likes.length > 0 && likes.length}</span>
         {liked ? (
           <p className="icon heart-icon me-2 fill" onClick={likePost}>
             <AiFillHeart />

@@ -19,12 +19,16 @@ const Category = () => {
       <Navbar />
       <div className="container">
         <Sidebar users={users} />
-        <div className="my-4 posts mx-auto">
+        <div className="mx-auto mt-3 posts">
           {categoryPosts.length < 1 ? (
-            <NoResults text={'No posts in this category yet.'} />
+            <div style={{ 'marginLeft': '20vw' }}>
+              <NoResults text={'No posts in this category yet.'} />
+            </div>
           ) : (
             categoryPosts.map((post) => (
-              <Post post={post.data()} key={post.id} id={post.id} />
+              <div className="my-4 post" key={post.id}>
+                <Post post={post.data()} id={post.id} />
+              </div>
             ))
           )}
         </div>
