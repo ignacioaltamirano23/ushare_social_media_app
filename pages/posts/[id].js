@@ -22,6 +22,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { GoVerified } from 'react-icons/go';
 import Comment from '../../components/Comment';
 import Link from 'next/link';
+import { getSession } from 'next-auth/react';
 
 const PostPage = () => {
   const [post, setPost] = useState();
@@ -103,59 +104,70 @@ const PostPage = () => {
   };
 
   return (
-    <div ref={ref} className="row" onKeyDown={handleGoBack} tabIndex={-1}>
-      <div className="col-md-7 vh-100 d-flex justify-content-center py-5 bg-dark position-relative">
+    <div
+      ref={ref}
+      className="row post-page vh-100"
+      onKeyDown={handleGoBack}
+      tabIndex={-1}
+    >
+      <div className="post-page img col-md-7 d-flex justify-content-center align-items-center position-relative">
         <p
           className="position-absolute close-icon"
           onClick={() => router.back()}
         >
           <AiOutlineCloseCircle />
         </p>
-        <Image width={400} height={200} src={post?.image} alt={post?.caption} />
+        <div className="image-container">
+          <Image
+            width={500}
+            height={500}
+            src={post?.image}
+            alt={post?.caption}
+          />
+        </div>
       </div>
 
       {/* USER */}
       <div className="col-md-5">
-        <div
-          style={{ 'height': '35vh' }}
-          className="row pt-3 border-bottom border bg-light"
-        >
+        <div className="row my-3 post-page user">
           <div className="d-flex align-items-center ms-3">
             <Link href={`/users/${post?.tag}`}>
               <Image
                 role={'button'}
                 className="rounded-circle"
                 src={post?.profileImg}
-                width={45}
-                height={45}
+                width={40}
+                height={40}
                 alt={post?.username}
               />
             </Link>
             <div className="ms-2">
               <Link href={`/users/${post?.tag}`}>
-                <p className="mb-0" role={'button'}>
+                <p role={'button'}>
                   <b>
                     {post?.username} <GoVerified />
                   </b>
                 </p>
               </Link>
-              <p className="mb-0">{post?.tag}</p>
+              <span className="mb-0">{post?.tag}</span>
             </div>
           </div>
-          <p className="ms-4 mt-4 text-dark">{post?.caption}</p>
-          <div className="m-4 align-self-end">
-            <span className="like-count">
-              {likes.length > 0 && likes.length}&nbsp;
-            </span>
+          <span className="ms-4 mt-4">{post?.caption}</span>
+          <div className="d-flex align-items-center m-4">
+            <span>{likes.length > 0 && likes.length}&nbsp;</span>
             {liked ? (
-              <AiFillHeart className="heart-icon fill" onClick={likePost} />
+              <p className="icon heart-icon fill" onClick={likePost}>
+                <AiFillHeart />
+              </p>
             ) : (
-              <BiHeart className="heart-icon" onClick={likePost} />
+              <p className="icon heart-icon" onClick={likePost}>
+                <BiHeart />
+              </p>
             )}
           </div>
         </div>
-        {/* COMMENT */}
-        <div className="row">
+        {/* COMMENTS */}
+        <div className="comment-container row">
           <>
             {comments.length > 0 &&
               comments.map((comment) => (
@@ -186,3 +198,22 @@ const PostPage = () => {
 };
 
 export default PostPage;
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
+}

@@ -83,7 +83,7 @@ const Post = ({ id, post }) => {
     await deleteDoc(doc(db, 'posts', id));
   };
   return (
-    <div className="p-2 post mt-1">
+    <div>
       <div className="d-flex align-items-center mb-2">
         <Link href={`/users/${post?.tag}`}>
           <Image
@@ -117,13 +117,13 @@ const Post = ({ id, post }) => {
           onClick={savePost}
         >
           {saved ? (
-            <p className="icon">
+            <span className="icon active">
               <AiOutlineFileDone />
-            </p>
+            </span>
           ) : (
-            <p className="icon">
+            <span className="icon">
               <AiOutlineFileAdd />
-            </p>
+            </span>
           )}
         </span>
       </div>
@@ -139,10 +139,8 @@ const Post = ({ id, post }) => {
           </a>
         </Link>
       </div>
-      <div className="d-flex align-items-center">
-        <span className="like-count">
-          {likes.length > 0 && likes.length}&nbsp;
-        </span>
+      <div className="d-flex align-items-center p-1">
+        <span>{likes.length > 0 && likes.length}&nbsp;</span>
         {liked ? (
           <p className="icon heart-icon me-2 fill" onClick={likePost}>
             <AiFillHeart />
@@ -152,16 +150,14 @@ const Post = ({ id, post }) => {
             <BiHeart />
           </p>
         )}
-        <span className="comments-count me-2">
-          {comments?.length > 0 && comments.length}1
-        </span>
+        <span className="me-2">{comments?.length > 0 && comments.length}</span>
         <Link href={`/posts/${id}`}>
-          <p className="icon comment-icon">
+          <p className="icon">
             <FaComments />
           </p>
         </Link>
         {session?.user.uid == post.postedBy && (
-          <p className="ms-auto icon delete-post-icon" onClick={deletePost}>
+          <p className="ms-auto icon" onClick={deletePost}>
             <AiOutlineDelete />
           </p>
         )}

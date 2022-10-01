@@ -4,6 +4,7 @@ import Post from '../../components/Post';
 import Sidebar from '../../components/Sidebar';
 import { useMainContext } from '../../context/mainContext';
 import { getSession } from 'next-auth/react';
+import Navbar from '../../components/Navbar';
 
 const Category = () => {
   const { posts, users } = useMainContext();
@@ -14,18 +15,21 @@ const Category = () => {
     (post) => post.data().category === category
   );
   return (
-    <div className="container">
-      <Sidebar users={users} />
-      <div className="my-4 posts mx-auto">
-        {categoryPosts.length < 1 ? (
-          <NoResults text={'No posts in this category yet.'} />
-        ) : (
-          categoryPosts.map((post) => (
-            <Post post={post.data()} key={post.id} id={post.id} />
-          ))
-        )}
+    <>
+      <Navbar />
+      <div className="container">
+        <Sidebar users={users} />
+        <div className="my-4 posts mx-auto">
+          {categoryPosts.length < 1 ? (
+            <NoResults text={'No posts in this category yet.'} />
+          ) : (
+            categoryPosts.map((post) => (
+              <Post post={post.data()} key={post.id} id={post.id} />
+            ))
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

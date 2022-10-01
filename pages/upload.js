@@ -15,6 +15,7 @@ import { useSession } from 'next-auth/react';
 import { categories } from '../utils/categories';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import Navbar from '../components/Navbar';
 
 const UploadPage = () => {
   const [caption, setCaption] = useState('');
@@ -74,7 +75,14 @@ const UploadPage = () => {
 
   return (
     <>
-      <div className="upload-container row mt-5 mx-auto container">
+      <Navbar />
+      <div
+        className={
+          loading
+            ? 'opacity upload-container row mt-5 mx-auto container'
+            : 'upload-container row mt-5 mx-auto container'
+        }
+      >
         <div
           className="col-md-5 d-flex justify-content-center align-items-center text-center p-5"
           role={'button'}
@@ -111,8 +119,8 @@ const UploadPage = () => {
             </div>
           )}
         </div>
-        <div className="col-md-7 d-flex flex-column justify-content-between p-5">
-          <div className="d-flex flex-column">
+        <div className="col-md-7 d-flex flex-column justify-content-between p-4">
+          <div className="d-flex flex-column mb-md-0 mb-3">
             <label className="mb-2">Caption</label>
             <input
               type="text"
@@ -120,7 +128,7 @@ const UploadPage = () => {
               value={caption}
             />
           </div>
-          <div className="d-flex flex-column">
+          <div className="d-flex flex-column mb-md-0 mb-3">
             <label className="mb-2">Choose a category</label>
             <select
               className="text-capitalize w-50"
@@ -133,7 +141,7 @@ const UploadPage = () => {
               ))}
             </select>
           </div>
-          <div className="d-flex justify-content-evenly">
+          <div className="d-flex justify-content-evenly mt-2 mt-md-0">
             <button onClick={discardPost}>Discard</button>
             <button onClick={sendPost}>
               {loading ? 'Loading...' : 'Post image'}

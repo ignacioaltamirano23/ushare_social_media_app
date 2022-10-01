@@ -4,6 +4,7 @@ import { getProviders, getSession } from 'next-auth/react';
 import { useMainContext } from '../context/mainContext';
 import Feed from '../components/Feed';
 import Sidebar from '../components/Sidebar';
+import Navbar from '../components/Navbar';
 
 export default function Home({ providers }) {
   const { posts, users } = useMainContext();
@@ -11,10 +12,13 @@ export default function Home({ providers }) {
 
   if (!session) return <Login providers={providers} />;
   return (
-    <main className="container">
-      <Sidebar users={users} />
-      <Feed posts={posts} />
-    </main>
+    <>
+      <Navbar />
+      <main className="container">
+        <Sidebar users={users} />
+        <Feed posts={posts} />
+      </main>
+    </>
   );
 }
 

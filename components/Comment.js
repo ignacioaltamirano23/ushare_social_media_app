@@ -14,7 +14,7 @@ const Comment = ({ comment, postId }) => {
   };
 
   return (
-    <div className="row comment-row">
+    <div className="row">
       <div className="col-10 align-self-center">
         <div className="row">
           <div className="col-2 ms-2 d-flex justify-content-center align-items-center">
@@ -36,13 +36,13 @@ const Comment = ({ comment, postId }) => {
                 <GoVerified />
               </p>
             </Link>
-            <p className="text-dark comment mb-0">{comment.comment}</p>
+            <span className="mb-0">{comment.comment}</span>
           </div>
         </div>
       </div>
       <div className="col-2 d-flex align-items-end">
         {session?.user.uid == comment.userId && (
-          <span className="delete-comment" onClick={deleteComment}>
+          <span role={'button'} className="text-danger" onClick={deleteComment}>
             Delete
           </span>
         )}

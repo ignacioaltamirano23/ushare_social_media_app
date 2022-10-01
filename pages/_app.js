@@ -20,7 +20,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
       <MainProvider>
-        <Navbar />
         {loading ? <Loader /> : <Component {...pageProps} />}
       </MainProvider>
     </SessionProvider>
