@@ -147,7 +147,7 @@ const Post = ({ id, post }) => {
         </Link>
       </div>
       <div className="d-flex align-items-center p-1">
-        <span className="me-2">{likes.length > 0 && likes.length}</span>
+        {likes.length > 0 && <span className="me-2">{likes.length}</span>}
         {liked ? (
           <p className="icon heart-icon me-2 fill" onClick={likePost}>
             <AiFillHeart />
