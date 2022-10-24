@@ -184,29 +184,6 @@ select {
   }
 }
 
-.post {
-  padding: 1rem;
-  width: 50vw;
-  margin-bottom: 2rem;
-  margin-left: 30vw;
-  border-bottom: 2px solid $third-color;
-  animation: 300ms showPost;
-  transition: background-color 300ms ease-in;
-
-  &:hover {
-    background-color: $gray-color;
-  }
-
-  p {
-    color: $primary;
-  }
-
-  span {
-    word-wrap: break-word;
-    max-width: 32ch;
-  }
-}
-
 .post-page {
   p {
     color: $primary;
@@ -229,6 +206,29 @@ select {
   }
 }
 
+.post {
+  padding: 1rem;
+  width: 40%;
+  margin-bottom: 2rem;
+  margin-left: 45%;
+  border-bottom: 2px solid $third-color;
+  animation: 300ms showPost;
+  transition: background-color 300ms ease-in;
+
+  &:hover {
+    background-color: $gray-color;
+  }
+
+  p {
+    color: $primary;
+  }
+
+  span {
+    word-wrap: break-word;
+    max-width: 32ch;
+  }
+}
+
 .selected-posts {
   background-color: $white-color;
   color: $black-color;
@@ -246,7 +246,7 @@ select {
 .sidebar {
   position: fixed;
   top: 12%;
-  width: 20vw;
+  width: 20%;
 }
 
 .tag {
@@ -378,7 +378,8 @@ select {
   }
 
   .post {
-    margin-left: 25vw;
+    width: 50%;
+    margin-left: 35%;
   }
 
   .sidebar {
