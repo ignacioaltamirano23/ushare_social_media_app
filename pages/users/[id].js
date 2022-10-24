@@ -40,13 +40,13 @@ const UserProfile = () => {
   return (
     <>
       <Navbar />
-      <div className="container mt-1">
+      <div className="container">
         <div className="profile-background position-relative">
           <Image
-            src="https://source.unsplash.com/random/1000×700/?nature"
+            src="https://source.unsplash.com/random/1920x600/?nature"
             alt="profile-background"
-            width={1200}
-            height={450}
+            width={1920}
+            height={600}
           />
           <div className="position-absolute top-100 start-50 translate-middle">
             <Image

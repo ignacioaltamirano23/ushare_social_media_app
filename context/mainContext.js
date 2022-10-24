@@ -7,6 +7,8 @@ const MainContext = createContext();
 export const MainProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
+  const [darkTheme, setDarkTheme] = useState();
+
   useEffect(() => {
     const postsRef = collection(db, 'posts');
     const q = query(postsRef, orderBy('createdAt', 'desc'));
@@ -22,7 +24,23 @@ export const MainProvider = ({ children }) => {
     });
   }, []);
 
-  const data = { posts, users };
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('darkTheme')) === 'ON') {
+      setDarkTheme(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    darkTheme
+      ? localStorage.setItem('darkTheme', JSON.stringify('ON'))
+      : localStorage.setItem('darkTheme', JSON.stringify('OFF'));
+  }, [darkTheme]);
+
+  const toggleDarkTheme = () => {
+    setDarkTheme(!darkTheme);
+  };
+
+  const data = { posts, users, darkTheme, toggleDarkTheme };
   return <MainContext.Provider value={data}>{children}</MainContext.Provider>;
 };
 
