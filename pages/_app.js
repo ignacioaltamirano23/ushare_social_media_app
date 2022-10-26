@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../sass/custom.scss';
 import '../styles/globals.scss';
 import '@fontsource/roboto';
 import { SessionProvider } from 'next-auth/react';
