@@ -5,24 +5,22 @@ import { useMainContext } from '../context/mainContext';
 import Feed from '../components/Feed';
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
-import { BsMoonFill, BsSunFill } from 'react-icons/bs';
+import ThemeButton from '../components/ThemeButton';
 
 export default function Home({ providers }) {
-  const { posts, users, darkTheme, toggleDarkTheme } = useMainContext();
+  const { posts, users, darkTheme } = useMainContext();
   const { data: session } = useSession();
 
   if (!session) return <Login providers={providers} />;
   return (
-    <main className={darkTheme ? 'dark' : 'light'}>
+    <section className={darkTheme ? 'dark' : 'light'}>
       <Navbar />
-      <div className="container">
+      <main className="container">
         <Sidebar users={users} />
         <Feed posts={posts} />
-      </div>
-      <button className="theme-btn" onClick={toggleDarkTheme}>
-        {darkTheme ? <BsSunFill /> : <BsMoonFill />}
-      </button>
-    </main>
+      </main>
+      <ThemeButton />
+    </section>
   );
 }
 

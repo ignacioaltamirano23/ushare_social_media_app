@@ -7,7 +7,7 @@ const MainContext = createContext();
 export const MainProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
-  const [darkTheme, setDarkTheme] = useState();
+  const [darkTheme, setDarkTheme] = useState(false);
 
   useEffect(() => {
     const postsRef = collection(db, 'posts');

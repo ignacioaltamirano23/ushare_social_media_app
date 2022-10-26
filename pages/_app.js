@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../sass/custom.scss';
 import '../styles/globals.scss';
 import '@fontsource/roboto';
-import Navbar from '../components/Navbar';
 import { SessionProvider } from 'next-auth/react';
 import { MainProvider } from '../context/mainContext';
 import Router from 'next/router';

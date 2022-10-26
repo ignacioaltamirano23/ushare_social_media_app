@@ -5,9 +5,10 @@ import Sidebar from '../../components/Sidebar';
 import { useMainContext } from '../../context/mainContext';
 import { getSession } from 'next-auth/react';
 import Navbar from '../../components/Navbar';
+import ThemeButton from '../../components/ThemeButton';
 
 const Category = () => {
-  const { posts, users } = useMainContext();
+  const { posts, users, darkTheme } = useMainContext();
   const { query } = useRouter();
   const category = query.category;
 
@@ -15,7 +16,7 @@ const Category = () => {
     (post) => post.data().category === category
   );
   return (
-    <>
+    <section className={darkTheme ? 'dark' : 'light'}>
       <Navbar />
       <div className="container">
         <Sidebar users={users} />
@@ -33,7 +34,8 @@ const Category = () => {
           )}
         </div>
       </div>
-    </>
+      <ThemeButton />
+    </section>
   );
 };
 

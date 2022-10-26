@@ -4,9 +4,10 @@ import Post from '../../components/Post';
 import { useMainContext } from '../../context/mainContext';
 import { getSession } from 'next-auth/react';
 import NoResults from '../../components/NoResults';
+import ThemeButton from '../../components/ThemeButton';
 
 const SearchPage = () => {
-  const { posts } = useMainContext();
+  const { posts, darkTheme } = useMainContext();
   const { query } = useRouter();
   const searchTerm = query.searchTerm;
 
@@ -16,18 +17,21 @@ const SearchPage = () => {
       post.data().caption.toLowerCase().includes(searchTerm)
   );
   return (
-    <>
+    <section className={darkTheme ? 'dark' : 'light'}>
       <Navbar />
       {filteredPosts.length < 1 ? (
         <NoResults text={'No results found for the search term.'} />
       ) : (
         <div className="posts-grid container mx-auto my-4">
           {filteredPosts.map((post) => (
-            <Post id={post.id} key={post.id} post={post.data()} />
+            <div className="user-post mx-auto" key={post.id}>
+              <Post id={post.id} post={post.data()} />
+            </div>
           ))}
         </div>
       )}
-    </>
+      <ThemeButton />
+    </section>
   );
 };
 

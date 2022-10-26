@@ -29,7 +29,7 @@ body {
   font-family: $font;
   margin: 0;
   overflow-x: hidden;
-  background-color: $white-color;
+  color: $black-color;
 }
 
 a {
@@ -46,7 +46,6 @@ button {
   background-color: $primary;
   color: $white-color;
   border-radius: 5px;
-  // min-width: 120px;
   padding: 0.6rem;
   transition: background-color 300ms ease-in;
   &:hover {
@@ -84,6 +83,10 @@ nav {
 
 p {
   margin: 0;
+}
+
+section {
+  min-height: 100vh;
 }
 
 select {
@@ -133,6 +136,13 @@ select {
   color: $white-color;
   background-color: $black-color;
   transition: 300ms ease-in;
+  border: 1px solid transparent;
+}
+
+.light {
+  color: $black-color;
+  background-color: $white-color;
+  transition: 300ms ease-in;
 }
 
 .theme-btn {
@@ -154,12 +164,6 @@ select {
   &:hover {
     background-color: $secondary;
   }
-}
-
-.light {
-  color: $black-color;
-  background-color: $white-color;
-  transition: 300ms ease-in;
 }
 
 .discover {
@@ -206,9 +210,14 @@ select {
   gap: 2rem;
   padding: 0 1rem;
 
-  div:hover {
-    transition: background-color 300ms ease-in;
-    background-color: $gray-color;
+  .user-post {
+    border-bottom: 1px solid $secondary;
+    animation: 300ms showPost;
+    &:hover {
+      color: $black-color;
+      transition: background-color 300ms ease-in;
+      background-color: $gray-color;
+    }
   }
 
   p {
@@ -243,12 +252,13 @@ select {
   width: 40%;
   margin-bottom: 2rem;
   margin-left: 45%;
-  border-bottom: 2px solid $third-color;
+  border-bottom: 1px solid $third-color;
   animation: 300ms showPost;
   transition: background-color 300ms ease-in;
 
   &:hover {
     background-color: $gray-color;
+    color: $black-color;
   }
 
   p {
@@ -291,14 +301,14 @@ select {
   height: 60vh;
   .col-md-5 {
     border: 2px dashed $third-color;
-    transition: border, background-color all 200ms ease-in;
+    transition: border, background-color 200ms ease-in;
     &:hover {
       border: 2px dashed $primary;
       background-color: $gray-color;
+      color: $black-color;
     }
 
     p {
-      color: $black-color;
       font-size: 1.5rem;
     }
 

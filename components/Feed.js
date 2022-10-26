@@ -1,6 +1,4 @@
 import React from 'react';
-import { BsMoonFill, BsSunFill } from 'react-icons/bs';
-import { useMainContext } from '../context/mainContext';
 import Post from './Post';
 
 const Feed = ({ posts }) => {

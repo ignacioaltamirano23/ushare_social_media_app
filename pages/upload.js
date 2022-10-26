@@ -16,6 +16,8 @@ import { categories } from '../utils/categories';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Navbar from '../components/Navbar';
+import ThemeButton from '../components/ThemeButton';
+import { useMainContext } from '../context/mainContext';
 
 const UploadPage = () => {
   const [caption, setCaption] = useState('');
@@ -25,6 +27,7 @@ const UploadPage = () => {
   const filePickerRef = useRef(null);
   const { data: session } = useSession();
   const { push } = useRouter();
+  const { darkTheme } = useMainContext();
 
   const sendPost = async () => {
     if (loading) return;
@@ -74,7 +77,7 @@ const UploadPage = () => {
   };
 
   return (
-    <>
+    <section className={darkTheme ? 'dark' : 'light'}>
       <Navbar />
       <div
         className={
@@ -149,7 +152,8 @@ const UploadPage = () => {
           </div>
         </div>
       </div>
-    </>
+      <ThemeButton />
+    </section>
   );
 };
 

@@ -8,9 +8,10 @@ import { db } from '../../config/firebase.config';
 import { getSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
 import Navbar from '../../components/Navbar';
+import ThemeButton from '../../components/ThemeButton';
 
 const UserProfile = () => {
-  const { posts, users } = useMainContext();
+  const { posts, users, darkTheme } = useMainContext();
   const [saves, setSaves] = useState([]);
   const [activeBtn, setActiveBtn] = useState('Created');
   const { query } = useRouter();
@@ -38,7 +39,7 @@ const UserProfile = () => {
   const buttonStyle = 'selected-posts m-2';
 
   return (
-    <>
+    <section className={darkTheme ? 'dark' : 'light'}>
       <Navbar />
       <div className="container">
         <div className="profile-background position-relative">
@@ -84,11 +85,13 @@ const UserProfile = () => {
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="posts-grid mb-3"
+          className="posts-grid mb-5"
         >
           {activeBtn === 'Created' && userCreatedPosts.length >= 1 ? (
             userCreatedPosts.map((post) => (
-              <Post key={post.id} id={post.id} post={post.data()} />
+              <div className="user-post" key={post.id}>
+                <Post id={post.id} post={post.data()} />
+              </div>
             ))
           ) : (
             <h3 className={activeBtn !== 'Created' ? 'd-none' : 'text-center'}>
@@ -98,11 +101,9 @@ const UserProfile = () => {
 
           {activeBtn === 'Saved' && userSavedPosts.length >= 1 ? (
             userSavedPosts.map((doc) => (
-              <Post
-                key={doc.data().id}
-                id={doc.data().id}
-                post={doc.data().post}
-              />
+              <div className="user-post mx-auto" key={doc.data().id}>
+                <Post id={doc.data().id} post={doc.data().post} />
+              </div>
             ))
           ) : (
             <h3 className={activeBtn !== 'Saved' ? 'd-none' : 'text-center'}>
@@ -111,7 +112,8 @@ const UserProfile = () => {
           )}
         </motion.div>
       </div>
-    </>
+      <ThemeButton />
+    </section>
   );
 };
 
